@@ -1,0 +1,1 @@
+{"info": {"filename": "0001_02_F.jpg", "id": "0001", "gender": "F", "age": 13, "date": "2023-08-17", "skin_type": 0, "sensitive": 0}, "images": {"device": 1, "width": 2448, "height": 3264, "angle": 0, "facepart": 2, "bbox": [1110, 1209, 1323, 1513]}, "annotations": {"glabellus_wrinkle": 1}, "equipment": null}
