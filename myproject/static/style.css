@@ -1,0 +1,177 @@
+body{
+   font-family: "Noto Sans KR", sans-serif;
+}
+
+header{
+   margin: 2% 4%;
+   display: flex;
+}
+
+.push{
+   margin-left: auto;
+}
+
+header > *{
+   padding: 1%;
+}
+
+header div:first-child{
+   font-weight: bold;
+   font-size: 20px;
+   line-height: 20px;
+}
+
+header div:nth-child(n+2):nth-child(-n+3){
+   margin-right: 3%;
+}
+
+header div:nth-child(4){
+   background-color: black;
+   color: #ffffff;
+   border-radius: 10px;
+   font-weight: bold;
+}
+
+#content1, #content2, #content3{
+   text-align: center;
+   margin-top: 40px; 
+}
+
+#content1 .title, #content2 .title, #content3 .title {
+   font-size: 25px;
+   margin-top: 7%;
+   margin-bottom: 7%;
+   font-weight: 500;   
+}
+
+#content1 label{
+   margin-right: 1%;
+}
+
+#content1 input[type='text']{
+   margin: 0% 0% 2% 1%;
+   border: 1px solid #999999;
+   box-shadow: 2px;
+   width: 100px;
+   height: 15px;
+   font-size: 15px;
+   padding: 10px;
+   border-radius: 10px;
+}
+
+#content1 button, #content2 input[type='submit'], #content3 button{
+   margin-top: 2%;
+   border: 0px;
+   box-shadow: 2px;
+   width: 90px;
+   height: 45px;
+   font-size: 15px;
+   border-radius: 10px;
+   font-weight: bold;
+}
+
+#content2Btn{
+   margin-top: 2%;
+   border: 1px solid #e3e3e3;;
+   box-shadow: 2px;
+   width: 150px;
+   height: 45px;
+   font-size: 15px;
+   border-radius: 10px;
+   font-weight: bold;
+   background-color: #fff;
+}
+
+#content1 button:hover, #content2 input[type='submit']:hover, #content3 button:hover, #content2Btn:hover{
+   background-color: #e3e3e3;
+}
+
+#content2 {
+   display: none;
+}
+
+#content2 img{
+   margin-bottom: 3%;
+}
+
+.filebox {
+   margin-bottom: 2%;
+}
+
+.filebox .upload-name {
+   display: inline-block;
+   height: 40px;
+   padding: 0 10px;
+   vertical-align: middle;
+   border: 1px solid #dddddd;
+   width: 50%;
+   color: #999999;
+}
+
+
+.filebox label {
+   display: inline-block;
+   padding: 10px 20px;
+   color: #fff;
+   vertical-align: middle;
+   background-color: #999999;
+   cursor: pointer;
+   height: auto;
+   margin-left: 10px;
+}
+
+.filebox input[type="file"] {
+   position: absolute;
+   width: 0;
+   height: 0;
+   padding: 0;
+   overflow: hidden;
+   border: 0;
+}
+
+#content3 {
+   display: flex;
+    flex-direction: column;
+    align-items: center; /* 자식 요소를 수평 가운데 정렬 */
+}
+
+#content3 form{
+   margin-top: 7%;
+}
+
+#content3 {
+   text-decoration: none;
+   color: #000000;
+}
+
+#content2-2 > a, #content2-3 > a{
+   text-decoration: none;
+   color: #000000;
+   
+}
+
+/* Result.html부분 */
+
+.result_box{
+   width: 50%;
+   padding: 5%;
+   margin: 4%;
+   background-color: #efefef;
+   border-radius: 10px;
+}
+
+.result_box p{
+   font-size: 20px;
+   margin-top: 2%;
+   margin-bottom: 2%;
+   font-weight: 500; 
+}
+
+/* style.css */
+.show {
+   display: block;
+}
+
+.hide {
+   display: none;
+}

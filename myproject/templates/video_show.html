@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Time</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div>BEAUTY LENS</div>
+        <div class="push">SIGN UP</div>
+        <div>SIGN IN</div>
+        <div>ABOUT</div>
+    </header>
+    
+    <div id="content">
+        <!-- 나이와 성별 입력 폼 -->
+        <div id="content1">
+            <div class="title">나이와 성별을 입력해주세요</div>
+            <form id="user-input-form">
+                <div>나이 : <input type="text" name="age" required></div>
+                
+                <div id="gender">
+                    <label for="">성별 : </label>
+                    <input type='radio' name='gender' value='female' required />여성
+                    <input type='radio' name='gender' value='male' required />남성
+                </div>
+                <button type="submit" onclick="clickGender(event)" id="content1Btn">다음으로</button>
+            </form>
+            <div id="response-message"></div> <!-- 서버의 응답을 표시할 div -->
+        </div>
+
+        <!-- 비디오 스트리밍 및 사진 업로드 폼 -->
+        <div id="content2" style="display:none;">
+            <div id="content2-1">
+                <div class="title">선택해주세요</div>
+                <button type="submit" onclick="clickCamera(event)" id="content2Btn">실시간 사진 촬영</button><br>
+                <button type="submit" onclick="clickFileUpload(event)" id="content2Btn">사진 업로드</button>
+            </div>
+            
+            <form id="upload-form" action="/predict" method="POST" enctype="multipart/form-data">
+                <div id="content2-2">
+                    <div class="title">안경과 모자, 마스크를 제거한 사진을 올려주세요</div>
+                    <div class="filebox">
+                        <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+                        <label for="file">파일 찾기</label>
+                        <input type="file" name="file" id="file"/>
+                        <input type="hidden" name="age" id="age-input">
+                        <input type="hidden" name="gender" id="gender-input"><br>
+                    </div>
+                    <a href="/">뒤로가기</a>
+                </div>
+
+                <div id="content2-3">
+                    <div class="title">안경과 모자, 마스크를 제거해주세요</div>
+                    <div id="countdown" style="font-size: 15px; color: red;"></div>
+                    <!-- <img src="{{ url_for('video') }}" width="640" height="480"></img><br> -->
+                    <img src="/video" width="640" height="480" id="cameraStream"></img><br>
+                    <a href="/">뒤로가기</a>
+
+                </div>
+                <input type="submit" value="다음으로"><br>
+            </form>
+
+            
+            
+        </div>
+    </div>
+
+    <script>
+        var genderValue;
+
+        $("#file").on('change',function(){
+            var fileName = $("#file").val();
+            $(".upload-name").val(fileName);
+        });
+
+        // 성별 입력에 대한 처리
+        function clickGender(event) {
+            event.preventDefault();  // 폼 제출 방지
+
+            
+            // 성별 값 설정
+            const maleRadio = document.querySelector('input[name="gender"][value="male"]');
+            genderValue = maleRadio.checked ? 'M' : 'F';
+
+            // 나이와 성별 정보를 숨기고 비디오 스트리밍을 보이게 함
+            document.getElementById("content1").style.display = "none";
+            document.getElementById("content2").style.display = "block";
+            document.getElementById("content2-2").style.display = "none";
+            document.getElementById("content2-3").style.display = "none";
+            
+            // 입력한 나이와 성별을 hidden 필드에 저장
+            var age = $("input[name='age']").val();
+            $("#age-input").val(age);
+            $("#gender-input").val(genderValue);
+        }
+
+        $(document).ready(function() {
+            $("#user-input-form").on("submit", function(event) {
+                event.preventDefault();
+                clickGender(event);  // 성별 선택 및 화면 전환 처리
+            });
+
+            $("#upload-form").on("submit", function(event) {
+                var age = $("#age-input").val();
+                var gender = $("#gender-input").val();
+                console.log("Age: " + age, "Gender: " + gender);
+            });
+        });
+
+        // 실시간 카메라 촬영을 선택했을 때  
+        function clickCamera(event){
+            document.getElementById("content2-1").style.display = "none";
+            document.getElementById("content2-3").style.display = "block";
+            
+            const countdownElement = document.getElementById("countdown");
+            let countdown = 3; 
+
+            // 카운트다운 타이머 설정
+            const countdownInterval = setInterval(() => {
+                countdownElement.textContent = `촬영까지 ${countdown}초`;
+                countdown--;
+
+                // 0초가 되면 카운트다운 종료
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.style.display = "none";
+                }
+            }, 1000);
+
+            // 1초 뒤 서버로 카메라 스트리밍 시작을 요청
+            setTimeout(()=>{
+                fetch('/video')
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log('Failed to start camera');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            })
+            
+        }
+
+        // 이미지 파일 업로드를 선택했을 때 
+        function clickFileUpload(event){
+            document.getElementById("content2-1").style.display = "none";
+            document.getElementById("content2-2").style.display = "block";
+        }
+
+    </script>
+</body>
+</html>

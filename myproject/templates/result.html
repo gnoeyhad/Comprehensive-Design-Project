@@ -1,0 +1,56 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div>BEAUTY LENS</div>
+        <div class="push">SIGN UP</div>
+        <div>SIGN IN</div>
+        <div>ABOUT</div>
+    </header>
+
+    <!-- 예측 결과 출력 -->
+     <div id="content3">
+        <div class="title">분석 결과</div>
+        <img src="{{ url_for('static', filename=processed_image_path.split('static/')[-1]) }}" alt="Processed Image" width="300">
+        <div class="result_box">
+            
+
+            <div id="NoneKey" class="{{ 'show' if keyword == 'None' else 'hide' }}">
+                <p>촬영한 사진에서 인식된 결과가 없습니다.</p><br><br>
+            </div>
+
+            <div id="YesKey" class="{{ 'hide' if keyword == 'None' else 'show' }}">
+                <p>피부 상태가 {{ keyword }}(으)로 예측되는 사용자님<br>추천하는 화장품은 아래와 같습니다.</p>
+                <div id="recommend_item">
+                    <img src="" alt="">
+                    {% if tables %}
+                        {{ tables|safe }} <!-- 테이블은 HTML로 렌더링 -->
+                    {% endif %}
+                   
+                </div>
+            </div>
+
+            <hr><br><br>
+            <p>사용자님의 나이와 성별을 바탕으로 예측한 모공값은 다음과 같습니다.</p><br>
+            <!-- <span>예측된 수분값: {{ value['Predicted Moisture'] }}</span> -->
+            <span>예측된 모공값: {{ value['Predicted Pore'] }}</span><br><br>
+
+            <a href="">구매 바로가기</a>
+        </div>
+        
+        
+        <button><a href="/">뒤로가기</a></button>
+     </div>
+    
+</body>
+</html>
