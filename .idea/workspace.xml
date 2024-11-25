@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37f82a8e-be75-4fa2-aae5-b2ccc7e7cdec" name="Changes" comment="Add flask" />
+    <list default="true" id="37f82a8e-be75-4fa2-aae5-b2ccc7e7cdec" name="Changes" comment="Add flask">
+      <change afterPath="$PROJECT_DIR$/myproject/pybo/static/frontend_function.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myproject/pybo/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myproject/pybo/templates/info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/views/main_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/views/main_views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +26,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "gnoeyhad"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/gnoeyhad/Comprehensive-Design-Project.git",
@@ -30,7 +42,9 @@
   "associatedIndex": 8
 }]]></component>
   <component name="ProjectId" id="2ms5cpsj8bM3i8qzukUhs5OMVUG" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,7 +54,8 @@
     "Python.__init__.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -67,8 +82,35 @@
       <option name="project" value="LOCAL" />
       <updated>1727854079107</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add flask">
+      <option name="closed" value="true" />
+      <created>1727854360715</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727854360715</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add flask">
+      <option name="closed" value="true" />
+      <created>1727854375594</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727854375594</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add flask" />
