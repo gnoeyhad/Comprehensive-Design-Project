@@ -65,8 +65,8 @@ def recommendation(keyword):
     ## predictions의 기준을 통해서 keyword를 뽑아내는 작업 필요
     #url_1 = str('https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+keyword+'&giftYn=N&t_page=홈&t_click=검색창&t_search_name='+keyword)
     url_1 = str('https://www.oliveyoung.co.kr/store/main/getBestList.do?dispCatNo=900000100100001&fltDispCatNo=10000010001&pageIdx=1&rowsPerPage=8')
-    url_2 = str('https://www.musinsa.com/category/104?keyword='+keyword+'&keywordType=keyword&gf=A' )
-    
+    url_2 = str('https://www.musinsa.com/category/104001?gf=A&sortCode=REVIEW' )
+
     if keyword != None:
 
         if keyword == '입술':
@@ -95,17 +95,18 @@ def recommendation(keyword):
             # Musinsa 데이터 
             scraper_2.fetch_data()
             filtered_df_2 = scraper_2.filter_by_keyword(keyword)
-            filtered_df = pd.concat([filtered_df, filtered_df_2], ignore_index=True)
         except Exception as e:
             print(f"Error with scraper 2: {e}")
 
         # 필터링 된 결과 
-        print(scraper_1.filter_by_keyword(keyword))
-        if not filtered_df.empty:
-            items = filtered_df.to_dict('records')
-        #return items
+        if not filtered_df.empty:  # 올리브영에서 추출된 결과가 있는 경우
+            prd = filtered_df.to_dict('records')
+        else:  # 올리브영에서 추출된 결과가 없는 경우
+            prd = filtered_df_2.to_dict('records')
+            
+        #return prd
 
-    return items
+    return prd
 
 
 # Regression and prediction route
@@ -198,41 +199,32 @@ def skin_prediction():
                     if class_name == 'lip':  # Check if the class_name is 'lip'
                         keyword = '입술'
                     elif class_name == 'fore' or class_name == 'eight' or class_name == 'eye_u' or class_name == 'eye_t' or class_name == 'be':
-                        keyword = '주름'
+                        keyword = '콜라겐'
                     elif class_name == 'job':
                         keyword = '잡티'
-                    else:
-                        keyword = '모공'
-            # elif itemNum >= 2:
-            #     keyword = []
-            #     for item in detection_data:
-            #         if item:
-            #             class_name = item[class_name] 
-            #             if class_name == 'eight' or class_name == 'eye_u' or class_name == 'eye_t':
-            #                 keyword.append('주름') 
-            #             elif class_name == 'lip':
-            #                 keyword.append('입술')
-            #             else:
-            #                 keyword.append('모공')
-            #         else:
-            #             keyword.append('모공')
-        keyword2 = '모공' 
+        else:
+            keyword = '모공'
 
         # 필터링된 제품 추천
-        try:
+        if keyword != '모공':
             filtered_products = recommendation(keyword)
-            filtered_products_2 = recommendation(keyword2)
-        except Exception as e:
-            print(f"Error in product recommendation: {e}")
-            return jsonify({"error": "Recommendation failed"}), 500
+            filtered_products_2 = recommendation('모공')
+        else:
+            filtered_products = None
+            filtered_products_2 = recommendation(keyword)
+
+        if keyword == '콜라겐':
+            keyword = '주름'
+
 
         # 추천 결과 처리
-        if filtered_products is None:
+        if filtered_products is None: ## keyword1이 있을 때는 pore 안보여주고, 없을땐 pore 보여주기
             return render_template(
                 'result.html',
                 value=predictions_m,
                 processed_image_path=processed_image_path,
-                tables=None,
+                itemms=None,
+                itemms2=filtered_products_2,
                 message="",
                 keyword=keyword
             )
@@ -243,7 +235,6 @@ def skin_prediction():
                 processed_image_path=processed_image_path,
                 itemms=filtered_products,
                 itemms2=filtered_products_2,
-                message=filtered_products if isinstance(filtered_products, str) else None,
                 keyword=keyword
             )
     except Exception as e:
