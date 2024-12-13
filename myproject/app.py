@@ -63,7 +63,8 @@ def gen_frames():
 # 추천 시스템 함수: 회귀를 통한 예측값과 image detection 결과를 비교하여 추천할 화장품을 선정
 def recommendation(keyword):
     ## predictions의 기준을 통해서 keyword를 뽑아내는 작업 필요
-    url_1 = str('https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+keyword+'&giftYn=N&t_page=홈&t_click=검색창&t_search_name='+keyword)
+    #url_1 = str('https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+keyword+'&giftYn=N&t_page=홈&t_click=검색창&t_search_name='+keyword)
+    url_1 = str('https://www.oliveyoung.co.kr/store/main/getBestList.do?dispCatNo=900000100100001&fltDispCatNo=10000010001&pageIdx=1&rowsPerPage=8')
     url_2 = str('https://www.musinsa.com/category/104?keyword='+keyword+'&keywordType=keyword&gf=A' )
     
     if keyword != None:
@@ -100,20 +101,11 @@ def recommendation(keyword):
 
         # 필터링 된 결과 
         print(scraper_1.filter_by_keyword(keyword))
-
-         # 데이터가 있는 경우만 클리닝 처리
         if not filtered_df.empty:
-            for column in filtered_df.columns:
-                # 문자열 열만 클리닝
-                if is_string_dtype(filtered_df[column]):
-                    filtered_df[column] = filtered_df[column].map(
-                        lambda x: x.strip() if isinstance(x, str) else x
-                    )
-        else:
-            # 데이터가 없는 경우 None 반환
-            return None
-        
-    return filtered_df
+            items = filtered_df.to_dict('records')
+        #return items
+
+    return items
 
 
 # Regression and prediction route
@@ -224,14 +216,12 @@ def skin_prediction():
             #                 keyword.append('모공')
             #         else:
             #             keyword.append('모공')
-        else:
-            keyword = 'None'   
-
-        print(keyword)
+        keyword2 = '모공' 
 
         # 필터링된 제품 추천
         try:
             filtered_products = recommendation(keyword)
+            filtered_products_2 = recommendation(keyword2)
         except Exception as e:
             print(f"Error in product recommendation: {e}")
             return jsonify({"error": "Recommendation failed"}), 500
@@ -251,7 +241,8 @@ def skin_prediction():
                 'result.html',
                 value=predictions_m,
                 processed_image_path=processed_image_path,
-                tables=[filtered_products.to_html(classes='data')] if not isinstance(filtered_products, str) else None,
+                itemms=filtered_products,
+                itemms2=filtered_products_2,
                 message=filtered_products if isinstance(filtered_products, str) else None,
                 keyword=keyword
             )

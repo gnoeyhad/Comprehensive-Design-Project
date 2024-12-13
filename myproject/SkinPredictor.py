@@ -122,11 +122,4 @@ class MoisturePorePredictor:
 
         except Exception as e:
             print(f"Prediction error: {e}")
-            return {"error": str(e)}
-
-# 사용 예시
-#predictor = MoisturePorePredictor('C:\\Users\\da010\\Downloads\\028.한국인 피부상태 측정 데이터\\3.개방데이터\\1.데이터\\Validation\\02.라벨링데이터\\VL\\All_json_file')
-#predictor.train_models()
-#predictor.save_models()  # 모델을 파일로 저장
-# predictor.load_models()  # 저장된 모델 불러오기
-# predictions = predictor.predict(age, gender)  # 예측 수행
+            return {"error": str(e)}  
