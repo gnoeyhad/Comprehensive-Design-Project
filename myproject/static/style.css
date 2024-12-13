@@ -40,7 +40,7 @@ header div:nth-child(4){
 #content1 .title, #content2 .title{
    font-size: 25px;
    margin-top: 7%;
-   margin-bottom: 7%;
+   margin-bottom: 3%;
    font-weight: 500;   
 }
 
@@ -73,6 +73,7 @@ header div:nth-child(4){
 
 #content1 button, #content2 input[type='submit'], #content3 button{
    margin-top: 2%;
+   margin-bottom: 10%;
    border: 0px;
    box-shadow: 2px;
    width: 90px;
@@ -82,8 +83,12 @@ header div:nth-child(4){
    font-weight: bold;
 }
 
+#content3 button{
+   margin-bottom: 10%;
+}
+
 #content2Btn{
-   margin-top: 2%;
+   margin-top: 10px;
    border: 1px solid #e3e3e3;;
    box-shadow: 2px;
    width: 150px;
@@ -154,7 +159,6 @@ header div:nth-child(4){
 #content2-2 > a, #content2-3 > a, #content3 a{
    text-decoration: none;
    color: #000000;
-   
 }
 
 /* Result.html부분 */
@@ -210,8 +214,6 @@ header div:nth-child(4){
    height: 350px;
    position: relative;
 }
-
-
 
 .product-card .prd_price{
    font-size: 15px;
