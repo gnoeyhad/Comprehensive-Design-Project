@@ -17,8 +17,6 @@ class MusinsaScraper:
         products = [i.text.strip() for i in html.find_all('p', class_='sc-gsFSjX')]
         prices = [i.find('span', class_='IOESYE').text.strip() for i in html.find_all('span', class_='sc-dcJtft')]
         
-        print(brands, products, prices)
-        
         # 상품 링크 추출
         links = [
             i.find('a')['href'] if i.find('a') else None 
@@ -27,6 +25,10 @@ class MusinsaScraper:
 
         # DataFrame 생성
         self.df = pd.DataFrame({'브랜드': brands, '상품': products, '가격': prices, '링크': links})
+
+        # 필터링 후 데이터 제한
+        if len(self.df) > 3:
+            self.df = self.df.head(3)  # 상위 3개만 유지
 
     def filter_by_keyword(self, keyword):
         # 특정 키워드가 포함된 상품 필터링
@@ -46,21 +48,31 @@ class OliveYoungScraper:
         brands = [i.text.strip() for i in html.find_all('span', class_='tx_brand')]
         products = [i.text.strip() for i in html.find_all('p', class_='tx_name')]
         prices = [i.find('span', class_='tx_num').text.strip() for i in html.find_all('span', class_='tx_cur')]
-
+        
         # 상품 링크 추출
-        links = [
-            i.find('a')['href'] if i.find('a') else None 
-            for i in html.find_all('p', class_='tx_name')  # '상품' p 태그에서 a 태그 찾기
-        ]
+        links = [i.attrs['href'] for i in html.find_all('a' ,class_='prd_thumb')]
+
+        # 이미지 추출
+        img_links = [i.find('img').attrs['src'] for i in html.find_all('a', class_='prd_thumb')]
 
         # DataFrame 생성
-        self.df = pd.DataFrame({'브랜드': brands, '상품': products, '가격': prices, '링크': links})
+        self.df = pd.DataFrame({
+            '브랜드': brands, 
+            '상품': products, 
+            '가격': prices, 
+            '링크': links,
+            '이미지 링크': img_links})
+
+        
+        
 
     def filter_by_keyword(self, keyword):
         # 특정 키워드가 포함된 상품 필터링
         if keyword == '입술':
             keyword = '립밤'
         self.df['상품'] = self.df['상품'].astype(str)
-        filtered_df = self.df[self.df['상품'].str.contains(keyword, na=False)]
+
+        # 개수 3개로 제한
+        filtered_df = self.df[self.df['상품'].str.contains(keyword, na=False)][:3]
 
         return filtered_df
