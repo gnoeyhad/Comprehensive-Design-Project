@@ -23,16 +23,15 @@
         <div class="title">분석 결과</div>
         <img src="{{ url_for('static', filename=processed_image_path.split('static/')[-1]) }}" alt="Processed Image">
         <div class="result_box">
-            
 
-            <div id="NoneKey" class="{{ 'show' if keyword == 'None' else 'hide' }}">
-                <p>촬영한 사진에서 인식된 결과가 없습니다.</p><br><br>
-            </div>
 
             <div id="YesKey" class="{{ 'hide' if keyword == 'None' else 'show' }}">
+                
+                
+                {% if itemms %}
                 <p class="predict_result">피부 상태가 {{ keyword }}(으)로 예측되는 사용자님<br>추천하는 화장품은 아래와 같습니다.</p>
+                
                 <div id="recommend_item">
-                    {% if itemms %}
                     {% for item in itemms %}
                     <div class="product-card">
                         <img src="{{ item['이미지 링크'] }}" alt="{{ item['상품'] }}">
@@ -41,10 +40,11 @@
                         <a href="{{ item['링크'] }}" class="purchase-link"> ▶ 구매 바로가기</a>
                     </div>
                     {% endfor %}
-                    {% else %}
-                    <p>추천할 제품이 없습니다.</p>
-                    {% endif %}
+   
                 </div>
+                {% else %}
+                <p class="predict_result">피부 상태가 측정되지 않아 추천할 화장품이 없습니다.</p><br>
+                {% endif %}
             </div>
 
             <hr><br><br>
