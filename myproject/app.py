@@ -9,7 +9,7 @@ from pathlib import Path
 from ultralytics import YOLO
 import pandas as pd 
 from pandas.api.types import is_string_dtype
-from Crawling import OliveYoungScraper, MusinsaScraper
+from Crawling import OliveYoungScraper, HwahaeScraper
 from SkinPredictor import MoisturePorePredictor
 
 app = Flask(__name__, static_folder='static')
@@ -62,27 +62,27 @@ def gen_frames():
 
 # 추천 시스템 함수: 회귀를 통한 예측값과 image detection 결과를 비교하여 추천할 화장품을 선정
 def recommendation(keyword):
-    ## predictions의 기준을 통해서 keyword를 뽑아내는 작업 필요
-    #url_1 = str('https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+keyword+'&giftYn=N&t_page=홈&t_click=검색창&t_search_name='+keyword)
+    # 올리브영
     url_1 = str('https://www.oliveyoung.co.kr/store/main/getBestList.do?dispCatNo=900000100100001&fltDispCatNo=10000010001&pageIdx=1&rowsPerPage=8')
-    url_2 = str('https://www.musinsa.com/category/104001?gf=A&sortCode=REVIEW' )
+    # 화해 
+    url_2 = str('https://www.hwahae.co.kr/rankings?english_name=category&theme_id=2')
 
     if keyword != None:
-
-        if keyword == '입술':
-            keyword =  '립밤'
+        if keyword == '입술 건조':
+            url_2 = str('https://www.hwahae.co.kr/rankings?english_name=category&theme_id=4408')
         
         headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
         'accept-language': 'en-US,en;q=0.9',
-    }
+        }
 
         scraper_1 = OliveYoungScraper(url_1, headers)
-        scraper_2 = MusinsaScraper(url_2, headers)
+        scraper_2 = HwahaeScraper(url_2, headers)
 
         # 초기화
         filtered_df = pd.DataFrame()
+        filtered_df_2 = pd.DataFrame()
 
         try:
             # Oliveyoung 데이터
@@ -92,9 +92,10 @@ def recommendation(keyword):
             print(f"Error with scraper 1: {e}")
 
         try:
-            # Musinsa 데이터 
+            # Hwahae 데이터 
             scraper_2.fetch_data()
             filtered_df_2 = scraper_2.filter_by_keyword(keyword)
+            print(filtered_df_2)
         except Exception as e:
             print(f"Error with scraper 2: {e}")
 
@@ -103,7 +104,7 @@ def recommendation(keyword):
             prd = filtered_df.to_dict('records')
         else:  # 올리브영에서 추출된 결과가 없는 경우
             prd = filtered_df_2.to_dict('records')
-            
+
         #return prd
 
     return prd
@@ -190,14 +191,13 @@ def skin_prediction():
             return jsonify({"error": "Failed to process YOLO detections"}), 500
 
         # 필터링 키워드 결정 및 추천 항목 가져오기
-        ## 수정 중인 부분 
-        #itemNum = len(detection_data)
         if detection_data:
             for item in detection_data:
                 if item:
                     class_name = item["class_name"]  # Access the 'class_name' key from the dictionary
+                    print(class_name)
                     if class_name == 'lip':  # Check if the class_name is 'lip'
-                        keyword = '입술'
+                        keyword = '입술 건조'
                     elif class_name == 'fore' or class_name == 'eight' or class_name == 'eye_u' or class_name == 'eye_t' or class_name == 'be':
                         keyword = '콜라겐'
                     elif class_name == 'job':
