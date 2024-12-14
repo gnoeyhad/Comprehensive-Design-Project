@@ -1,0 +1,64 @@
+[33mcommit b2d3d498c9f4ff00f1718c7d7fe0dc54b53f9081[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Sat Dec 14 02:33:46 2024 +0900
+
+    Feat: Oliveyoung Crwaling 완성
+
+[33mcommit 652fc4d9661d0cb9c648537367607482aa6931d3[m
+Merge: 3cbd2e8 829137d
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Fri Dec 13 22:44:42 2024 +0900
+
+    Merge branch 'main' of https://github.com/gnoeyhad/Comprehensive-Design-Project
+    Fix: Oliveyoung Crwaling
+
+[33mcommit 3cbd2e81ed82725d89ac8b259412eedfcf8ce20d[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Fri Dec 13 22:42:59 2024 +0900
+
+    fix: Oliveyoung Crwaling 수정
+
+[33mcommit 829137d5f8128194db34a3059b09476d9f794aa7[m
+Author: dahyeong <da0108hy@naver.com>
+Date:   Tue Nov 26 16:34:23 2024 +0900
+
+    Create README.md
+    
+    Add README
+
+[33mcommit 40f2193f3c117b38e1ad37a766c71bd18a2997b6[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: c65ecc2 19792b4
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Mon Nov 25 18:48:36 2024 +0900
+
+    Merge branch 'master' of https://github.com/gnoeyhad/Comprehensive-Design-Project
+
+[33mcommit c65ecc25430abaad4637d9cd2d39b013cb25d4ad[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Mon Nov 25 18:46:04 2024 +0900
+
+    Midway commit: partial implementation of feature
+
+[33mcommit ba7ba7ae91bbeba07e12ec45e9a03de35f78e49a[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Wed Oct 2 16:32:52 2024 +0900
+
+    Add flask
+
+[33mcommit bf84db1d02a41da93503914cfca2060f26ff87d4[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Wed Oct 2 16:32:40 2024 +0900
+
+    Add flask
+
+[33mcommit 593cde53b5a8565b1d13f83f245f55ad2b277708[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Wed Oct 2 16:27:07 2024 +0900
+
+    Add flask
+
+[33mcommit 19792b431bf8617e86066dc682758d0a292e7b33[m
+Author: gnoeyhad <da0108hy@naver.com>
+Date:   Tue Sep 24 22:31:15 2024 +0900
+
+    feat: Add json to yaml in python
