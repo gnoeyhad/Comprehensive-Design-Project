@@ -18,7 +18,7 @@ model = YOLO('./best.pt')
 
 @app.route('/')
 def video_show():
-    return render_template('video_show.html')
+    return render_template('index.html')
 
 @app.route('/video')
 def video():
@@ -95,7 +95,6 @@ def recommendation(keyword):
             # Hwahae 데이터 
             scraper_2.fetch_data()
             filtered_df_2 = scraper_2.filter_by_keyword(keyword)
-            print(filtered_df_2)
         except Exception as e:
             print(f"Error with scraper 2: {e}")
 
