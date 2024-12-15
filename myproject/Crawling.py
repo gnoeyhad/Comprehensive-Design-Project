@@ -65,11 +65,9 @@ class HwahaeScraper:
         
 
     def filter_by_keyword(self, keyword):
-        print(keyword)
         # 특정 키워드가 포함된 상품 필터링
         if keyword == '입술 건조':
             keyword = '립밤'
-            print(keyword)
         self.df['상품'] = self.df['상품'].astype(str)
 
         filtered_df = self.df
