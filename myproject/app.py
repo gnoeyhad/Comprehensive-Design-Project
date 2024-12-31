@@ -125,7 +125,7 @@ def skin_prediction():
         except ValueError:
             return jsonify({"error": "Invalid age input"}), 400
 
-        data_dir = "C:\\Users\\da010\\Downloads\\028.한국인 피부상태 측정 데이터\\3.개방데이터\\1.데이터\\Validation\\02.라벨링데이터\\VL\\All_json_file\\"
+        data_dir = "..\\dataset-json\\"
         predictor = MoisturePorePredictor(data_dir)
         
         try:
