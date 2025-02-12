@@ -1,6 +1,8 @@
 ## 전자공학종합설계 프로젝트
 **2024-2 전자공학종합설계 영상처리 및 컴퓨터비전 관련 이론, 구현, 응용 프로젝트** 
 
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2435f18b-21fa-42e6-ab5b-9d34e9ac5f72/2fee35ab-48ab-4bc5-87f1-e241230963f5/image.png)
+
 **서비스**
 
 "Beauty Lense"
