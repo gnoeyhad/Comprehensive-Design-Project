@@ -1,9 +1,6 @@
 ## 전자공학종합설계 프로젝트
 **2024-2 전자공학종합설계 영상처리 및 컴퓨터비전 관련 이론, 구현, 응용 프로젝트** 
 
-![Image](https://github.com/user-attachments/assets/c28a5f16-bf06-4db3-bdc0-81f5519989c1)
-
-
 
 **서비스**
 
@@ -28,6 +25,12 @@
     - `XGBoost` 예측 및 분석
     - `Beautiful Soup`을 활용한 웹사이트(올리브영, 화해) 크롤링
     - `Python Flask`를 이용해 웹 서버 구현, 실시간 이미지 입력 구현, YOLOv8 모델 연결
+
+
+**실제 구현 후 웹서비스 테스트**
+
+![Image](https://github.com/user-attachments/assets/c28a5f16-bf06-4db3-bdc0-81f5519989c1)
+
 
 
 **시기**
